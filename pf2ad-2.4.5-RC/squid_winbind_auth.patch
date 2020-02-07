@@ -1,0 +1,46 @@
+diff --git a/squid_auth.xml b/squid_auth.xml
+index 2453bde..e714473 100644
+--- squid_auth.xml
++++ squid_auth.xml
+@@ -104,6 +104,7 @@
+ 				<option><name>LDAP</name><value>ldap</value></option>
+ 				<option><name>RADIUS</name><value>radius</value></option>
+ 				<option><name>Captive Portal</name><value>cp</value></option>
++				<option><name>Winbind NTLM</name><value>ntlm</value></option>
+ 			</options>
+ 			<onchange>on_auth_method_changed()</onchange>
+ 		</field>
+@@ -178,6 +179,32 @@
+ 			<rows>5</rows>
+ 			<encoding>base64</encoding>
+ 		</field>
++ 		<field>
++		    <name>Squid Authentication NTLM Settings</name>
++		    <type>listtopic</type>
++		</field>
++		<field>
++		    <fielddescr>NTLMSSP Negotiate</fielddescr>
++		    <fieldname>ntlmssp</fieldname>
++		    <description>Use the NTLMSSP Negotiate packet (Transparent authentication in Windows Domain)</description>
++		    <type>checkbox</type>
++		    <default_value>on</default_value>
++		</field>
++		<field>
++		    <fielddescr>NTLMSSP Auth processes</fielddescr>
++		    <fieldname>ntlm_proc</fieldname>
++		    <description>The number of authenticator processes to spawn. If many authentications are expected within a short timeframe, increase this number accordingly.</description>
++		    <type>input</type>
++		    <size>40</size>
++		    <default_value>20</default_value>
++		</field>
++		<field>
++		    <fielddescr>NTLM Default Domain</fielddescr>
++		    <fieldname>ntlm_domain</fieldname>
++		    <description>Set the default domain for use in ntlm authentication</description>
++		    <type>input</type>
++		    <size>50</size>
++		</field>		
+ 		<field>
+ 			<name>Squid Authentication LDAP Settings</name>
+ 			<type>listtopic</type>
+ 
