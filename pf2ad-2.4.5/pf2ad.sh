@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION='20180302001' # Welcome to Brasil
+VERSION='20202703001' # Welcome to Egypt
 
 if [ -f "/etc/samba.patch.version" ]; then
 	if [ "$(cat /etc/samba.patch.version)" = "$VERSION" ]; then
@@ -23,7 +23,7 @@ export ASSUME_ALWAYS_YES
 
 # Lock packages necessary
 /usr/sbin/pkg lock pkg
-/usr/sbin/pkg lock pfSense-2.4.4
+/usr/sbin/pkg lock pfSense-2.4.5
 
 mkdir -p /usr/local/etc/pkg/repos
 
@@ -39,7 +39,7 @@ EOF
 /usr/sbin/pkg install -r pf2ad net/samba44 2> /dev/null
 
 /usr/sbin/pkg unlock pkg
-/usr/sbin/pkg unlock pfSense-2.4.4
+/usr/sbin/pkg unlock pfSense-2.4.5
 
 rm -rf /usr/local/etc/pkg/repos/pf2ad.conf
 /usr/sbin/pkg update
@@ -48,8 +48,8 @@ mkdir -p /var/db/samba4/winbindd_privileged
 chown -R :proxy /var/db/samba4/winbindd_privileged
 chmod -R 0750 /var/db/samba4/winbindd_privileged
 
-fetch -o /usr/local/pkg -q https://github.com/Carlosanalista/pf2ad-2.4.4/samba.inc
-fetch -o /usr/local/pkg -q https://github.com/Carlosanalista/pf2ad-2.4.4/samba.xml
+fetch -o /usr/local/pkg -q https://github.com/hcwwadmin/pf2ad/pf2ad-2.4.5/samba.inc
+fetch -o /usr/local/pkg -q https://github.com/hcwwadmin/pf2ad/pf2ad-2.4.4/samba.xml
 
 /usr/local/sbin/pfSsh.php <<EOF
 \$samba = false;
@@ -91,8 +91,8 @@ if [ ! "$(/usr/sbin/pkg info | grep pfSense-pkg-squid)" ]; then
 	/usr/sbin/pkg install -r pfSense pfSense-pkg-squid
 fi
 cd /usr/local/pkg
-fetch -o - -q https://github.com/Carlosanalista/pf2ad-2.4.4/squid_winbind_auth.patch | patch -b -p0 -f
-fetch -o /usr/local/pkg -q https://github.com/Carlosanalista/pf2ad-2.4.4/squid.inc
+fetch -o - -q https://github.com/hcwwadmin/pf2ad/pf2ad-2.4.5/squid_winbind_auth.patch | patch -b -p0 -f
+fetch -o /usr/local/pkg -q https://github.com/hcwwadmin/pf2ad/pf2ad-2.4.5/squid.inc
 
 if [ ! -f "/usr/local/etc/smb4.conf" ]; then
 	touch /usr/local/etc/smb4.conf
